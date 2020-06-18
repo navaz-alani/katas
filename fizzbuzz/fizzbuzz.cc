@@ -2,8 +2,9 @@
 
 int main(void) {
   const int upperBound = 100;
+  int div3, div5;
   for (int i = 1; i <= upperBound; ++i) {
-    int div3 = i % 3, div5 = i % 5;
+    div3 = i % 3; div5 = i % 5;
     if ( div3 == 0 && div5 == 0 ) {
       std::cout << i << " fizzbuzz" << std::endl;
     } else if ( div3 == 0 ) {
