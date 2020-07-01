@@ -7,7 +7,18 @@ cd tests
 for t in $(ls *.in); do
   input="${t}"
   expected="${t%.in}.out"
-  if [ "$(./../${prog} ${input})" != "$(cat ${expected})" ]; then
-    echo "Test failed: ${t}"
+  tmpOutFile="$(mktmp -q)"
+  if [ $? -ne 0 ]; then
+    echo "failed to allocate temporary output file"
+    exit 1
   fi
+  ./../${prog} ${input} > ${tmpOutFile}
+  if [ "$(cat ${tmpOutFile})" != "$(cat ${expected})" ]; then
+    echo "test failed: ${t}"
+    echo "expected:"
+    cat ${expected}
+    echo "actual:"
+    cat ${tmpOutFile}
+  fi
+  rm ${tmpOutFile}
 done
