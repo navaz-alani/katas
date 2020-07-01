@@ -1,5 +1,5 @@
 upperBound=100
-for i in $(seq 1 100); do
+for i in $(seq 1 ${upperBound}); do
   div3=$(( ${i} % 3 ))
   div5=$(( ${i} % 5 ))
   if [ ${div3} -eq 0 ] && [ ${div5} -eq 0 ]; then
